@@ -18,15 +18,18 @@ kotlin {
             }
         }
     }
-    
-    val xcf = XCFramework()
+
+    val xcFrameworkName = "kmplibrarypoc"
+    val xcf = XCFramework(xcFrameworkName)
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
     ).forEach {
         it.binaries.framework {
-            baseName = "shared"
+            baseName = xcFrameworkName
+
+            binaryOption("bundleId", "org.polvallsortiz.${xcFrameworkName}")
             xcf.add(this)
             isStatic = true
         }
@@ -57,6 +60,7 @@ android {
 publishing {
     publications.withType<MavenPublication>().configureEach {
         artifactId = "kmplibrarypoc"
+        version = "1.0.0"
 
         pom {
             name.set("KMP Library POC")
