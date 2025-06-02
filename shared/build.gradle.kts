@@ -56,9 +56,7 @@ android {
 
 publishing {
     publications.withType<MavenPublication>().configureEach {
-        group = "com.github.straturn"
-        artifactId = "KMPLibraryPOC"
-        version = "1.0.0"
+        artifactId = "kmplibrarypoc"
 
         pom {
             name.set("KMP Library POC")
@@ -69,7 +67,7 @@ publishing {
     repositories {
         maven {
             name = "GitHubPackages"
-            url = uri("https://maven.pkg.github.com/Straturn/KMPLibraryPOC")
+            url = uri("https://maven.pkg.github.com/polvallsortiz/kmplibrarypoc")
             credentials {
                 username = project.findProperty("gpr.user") as String? ?: System.getenv("USERNAME_GITHUB")
                 password = project.findProperty("gpr.key") as String? ?: System.getenv("TOKEN_GITHUB")
