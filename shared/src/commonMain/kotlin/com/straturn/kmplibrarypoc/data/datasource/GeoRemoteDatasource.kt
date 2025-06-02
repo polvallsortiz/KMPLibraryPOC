@@ -9,12 +9,7 @@ import io.ktor.client.statement.HttpResponse
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
 
-abstract class GeoRemoteDatasource {
-    abstract suspend fun getIpInfo(ip: String): GeoDTO
-}
-
-class GeoRemoteDatasourceImpl: GeoRemoteDatasource() {
-
+class GeoRemoteDatasource() {
     private val client = HttpClient {
         install(ContentNegotiation) {
             json(Json {
@@ -23,7 +18,7 @@ class GeoRemoteDatasourceImpl: GeoRemoteDatasource() {
         }
     }
 
-    override suspend fun getIpInfo(ip: String): GeoDTO {
+    suspend fun getIpInfo(ip: String): GeoDTO {
         //161.185.160.93
         val response: HttpResponse = client.get("https://ipinfo.io/${ip}/geo")
         return response.body()
